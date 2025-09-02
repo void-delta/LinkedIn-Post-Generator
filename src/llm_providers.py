@@ -29,16 +29,16 @@ def chat(
         )
     except Exception as e:
         # Fallback: if Gemini fails and HF key exists
-        if provider == "gemini" and settings.hf_key:
-            resp = completion(
-                model="huggingface/mistralai/Mixtral-8x7B-Instruct",
-                messages=messages,
-                temperature=temperature or settings.temperature,
-                max_tokens=max_tokens or settings.max_tokens,
-                api_key=settings.hf_key,
-            )
-        else:
-            raise RuntimeError(f"LLM call failed: {e}")
+        # if provider == "gemini" and settings.hf_key:
+        #     resp = completion(
+        #         model="huggingface/mistralai/Mixtral-8x7B-Instruct",
+        #         messages=messages,
+        #         temperature=temperature or settings.temperature,
+        #         max_tokens=max_tokens or settings.max_tokens,
+        #         api_key=settings.hf_key,
+        #     )
+        # else:
+        raise RuntimeError(f"LLM call failed: {e}")
 
     content = resp.choices[0].message["content"]
     usage = getattr(resp, "usage", None) or {}
